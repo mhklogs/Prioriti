@@ -195,8 +195,8 @@ export default function App() {
     const title = `Urgent priority: ${task.task_name}`;
     const options = {
       body: `Calculated Priority Score: ${task.score} (Importance: ${task.importance}, Difficulty: ${task.difficulty}) requires your focus immediately.`,
-      icon: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=192&h=192&fit=crop&q=80',
-      badge: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=192&h=192&fit=crop&q=80'
+      icon: '/icon-192.png',
+      badge: '/icon-192.png'
     };
 
     // Attempt Native HTML5 Notification
@@ -226,7 +226,7 @@ export default function App() {
         // Trigger a test notification immediately to confirm
         new Notification('System Alerts Enabled', {
           body: 'prioriti. will now alert you of urgent uncompleted priorities.',
-          icon: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=192&h=192&fit=crop&q=80'
+          icon: '/icon-192.png'
         });
       } else if (permission === 'denied') {
         showToast('Notification permission denied. Please allow notifications in your site settings.', 'info');
@@ -324,6 +324,15 @@ export default function App() {
     const updated = tasks.filter(task => task.id !== id);
     saveTasks(updated);
     showToast('Task deleted from stack.', 'info');
+  };
+
+  // Clear all completed tasks
+  const handleClearCompleted = () => {
+    const completedCount = completedTasks.length;
+    if (completedCount === 0) return;
+    const updated = tasks.filter(task => !task.completed);
+    saveTasks(updated);
+    showToast(`${completedCount} completed task${completedCount === 1 ? '' : 's'} cleared from the stack.`, 'success');
   };
 
   // Reset to default starting list
@@ -603,8 +612,19 @@ export default function App() {
                 ({activeTasks.length} active · {completedTasks.length} completed)
               </span>
             </h2>
-            <div className="text-[10px] font-mono text-text-muted">
-              Descending Priority Score
+            <div className="flex items-center gap-3">
+              <div className="text-[10px] font-mono text-text-muted">
+                Descending Priority Score
+              </div>
+              {completedTasks.length > 0 && (
+                <button
+                  onClick={handleClearCompleted}
+                  className="text-[10px] font-mono text-text-muted hover:text-red-500 border border-dashed border-border-custom hover:border-red-500/40 px-2 py-0.5 rounded-md transition-all cursor-pointer"
+                  title={`Remove ${completedTasks.length} completed task${completedTasks.length === 1 ? '' : 's'}`}
+                >
+                  clear completed
+                </button>
+              )}
             </div>
           </div>
 

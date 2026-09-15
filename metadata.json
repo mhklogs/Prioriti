@@ -2,5 +2,5 @@
   "name": "prioriti.",
   "description": "An intelligent task tracker styled in the ultra-minimalist Komma aesthetic with offline-first PWA caching and custom priority scoring.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": []
 }

@@ -1,8 +1,11 @@
-const CACHE_NAME = 'prioriti-cache-v1';
+const CACHE_NAME = 'prioriti-cache-v2';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
-  '/manifest.json'
+  '/manifest.json',
+  '/icon-192.png',
+  '/icon-512.png',
+  '/favicon-32.png'
 ];
 
 self.addEventListener('install', (event) => {
