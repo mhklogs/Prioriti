@@ -366,11 +366,11 @@ export default function App() {
               initial={{ opacity: 0, y: -20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9, y: -10 }}
-              className={`p-4 rounded-xl border shadow-sm flex items-start gap-3 backdrop-blur-md pointer-events-auto ${
+              className={`p-4 rounded-xl border shadow-sm flex items-start gap-3 pointer-events-auto ${
                 toast.type === 'warning' 
-                  ? 'bg-amber-500/10 text-amber-500 border-amber-500/20' 
+                  ? 'bg-[#FBF1E8] text-[#9A3412] border-[#9A3412]/20' 
                   : toast.type === 'success' 
-                  ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20' 
+                  ? 'bg-[#EFF4EE] text-[#146C5C] border-[#146C5C]/20' 
                   : 'bg-card-bg text-text-primary border-border-custom'
               }`}
             >
@@ -386,28 +386,29 @@ export default function App() {
         {/* Header Zone */}
         <header className="flex items-center justify-between">
           <div className="flex flex-col">
-            <h1 className="text-3xl font-bold tracking-tight font-display text-text-primary select-none flex items-center gap-1.5">
+            <h1 className="text-3xl font-display tracking-tight text-text-primary select-none flex items-center gap-1.5">
               prioriti<span className="text-accent-custom">.</span>
             </h1>
-            <p className="text-xs text-text-muted mt-0.5 font-medium tracking-tight">intelligent task ranking system</p>
+            <p className="text-xs text-text-muted mt-1 font-medium">intelligent task ranking system</p>
           </div>
 
           <div className="flex items-center gap-2">
             {!isInstalled ? (
               <button
                 onClick={handleInstallClick}
-                className="px-3 py-1.5 rounded-full text-[10px] font-mono font-medium uppercase tracking-wider flex items-center gap-1.5 transition-all select-none bg-accent-custom/10 text-accent-custom border border-accent-custom/20 hover:bg-accent-custom/20 active:scale-[0.97] cursor-pointer"
+                className="inline-flex items-center gap-1.5 text-xs font-medium text-text-muted hover:text-text-primary border border-border-custom rounded-lg px-3 py-2 transition-colors cursor-pointer"
                 title="Install prioriti. as a native app on your device"
               >
-                <Plus className="w-3 h-3" />
-                install app
+                <Plus className="w-3.5 h-3.5" />
+                Install app
               </button>
             ) : (
               <div 
-                className="px-3 py-1.5 rounded-full text-[10px] font-mono font-medium uppercase tracking-wider flex items-center gap-1.5 transition-colors duration-300 select-none bg-emerald-500/10 text-emerald-500 border border-emerald-500/20"
+                className="inline-flex items-center gap-1.5 text-xs font-medium text-[#146C5C] rounded-lg px-3 py-2 border border-[#146C5C]/20"
                 title="prioriti. is running in native app mode"
               >
-                ✓ installed
+                <span className="w-1.5 h-1.5 rounded-full bg-[#146C5C]" />
+                Installed
               </div>
             )}
           </div>
@@ -443,18 +444,18 @@ export default function App() {
               
               {/* Importance Selector */}
               <div className="flex flex-col gap-1.5">
-                <label className="text-[10px] uppercase font-mono font-semibold tracking-wider text-text-muted">
-                  Importance <span className="text-text-primary font-bold">({importance})</span>
+                <label className="text-xs font-medium text-text-muted">
+                  Importance <span className="text-text-primary font-semibold">({importance})</span>
                 </label>
-                <div className="flex gap-1.5">
+                <div className="flex gap-2">
                   {[1, 2, 3, 4, 5].map(val => (
                     <button
                       key={`imp-${val}`}
                       type="button"
                       onClick={() => setImportance(val)}
-                      className={`flex-1 py-1.5 rounded-lg text-xs font-mono font-medium border transition-all ${
+                      className={`flex-1 py-1.5 rounded-lg text-xs font-medium border transition-all ${
                         importance === val
-                          ? 'bg-accent-custom border-accent-custom text-white shadow-sm'
+                          ? 'bg-accent-custom border-accent-custom text-white'
                           : 'bg-app-bg border-border-custom text-text-muted hover:text-text-primary hover:border-text-muted'
                       }`}
                     >
@@ -466,18 +467,18 @@ export default function App() {
 
               {/* Difficulty Selector */}
               <div className="flex flex-col gap-1.5">
-                <label className="text-[10px] uppercase font-mono font-semibold tracking-wider text-text-muted">
-                  Difficulty <span className="text-text-primary font-bold">({difficulty})</span>
+                <label className="text-xs font-medium text-text-muted">
+                  Difficulty <span className="text-text-primary font-semibold">({difficulty})</span>
                 </label>
-                <div className="flex gap-1.5">
+                <div className="flex gap-2">
                   {[1, 2, 3, 4, 5].map(val => (
                     <button
                       key={`diff-${val}`}
                       type="button"
                       onClick={() => setDifficulty(val)}
-                      className={`flex-1 py-1.5 rounded-lg text-xs font-mono font-medium border transition-all ${
+                      className={`flex-1 py-1.5 rounded-lg text-xs font-medium border transition-all ${
                         difficulty === val
-                          ? 'bg-accent-custom border-accent-custom text-white shadow-sm'
+                          ? 'bg-accent-custom border-accent-custom text-white'
                           : 'bg-app-bg border-border-custom text-text-muted hover:text-text-primary hover:border-text-muted'
                       }`}
                     >
@@ -491,8 +492,8 @@ export default function App() {
 
             {/* Context Tags Selector Row */}
             <div className="flex flex-col gap-1.5 mt-1">
-              <label className="text-[10px] uppercase font-mono font-semibold tracking-wider text-text-muted">
-                Context Tags (Optional)
+              <label className="text-xs font-medium text-text-muted">
+                Context tags <span className="text-text-muted/70">(optional)</span>
               </label>
               <div className="flex gap-2">
                 <div className="relative flex-1">
@@ -502,15 +503,15 @@ export default function App() {
                     value={tagInput}
                     onChange={e => setTagInput(e.target.value)}
                     onKeyDown={e => e.key === 'Enter' && (e.preventDefault(), handleAddTag())}
-                    placeholder="Add tags (e.g. work, family, health) - Press Enter"
-                    className="w-full bg-app-bg text-xs border border-border-custom rounded-lg pl-9 pr-12 py-2 text-text-primary transition-all placeholder:text-text-muted"
+                    placeholder="e.g. work, family, health — press Enter"
+                    className="w-full bg-app-bg text-xs border border-border-custom rounded-lg pl-9 pr-14 py-2 text-text-primary transition-all placeholder:text-text-muted"
                   />
                   <button
                     type="button"
                     onClick={handleAddTag}
-                    className="absolute right-2 top-1.5 bg-card-bg hover:bg-border-custom border border-border-custom text-[10px] font-semibold font-mono px-2 py-1 rounded transition-colors text-text-primary"
+                    className="absolute right-1.5 top-1.5 bg-card-bg hover:bg-border-custom border border-border-custom text-[11px] font-medium px-2.5 py-1 rounded-md transition-colors text-text-primary"
                   >
-                    ADD
+                    Add
                   </button>
                 </div>
               </div>
@@ -527,7 +528,7 @@ export default function App() {
                     {contextTags.map(tag => (
                       <span 
                         key={`tag-${tag}`} 
-                        className="inline-flex items-center gap-1 px-2.5 py-1 bg-app-bg border border-border-custom text-[10px] font-mono rounded-full text-text-primary"
+                        className="inline-flex items-center gap-1 px-2 py-1 bg-app-bg border border-border-custom text-[11px] rounded-md text-text-primary"
                       >
                         #{tag}
                         <button 
@@ -546,12 +547,12 @@ export default function App() {
 
             {/* Add Button Area */}
             <div className="flex items-center justify-between border-t border-border-custom/50 pt-4 mt-2">
-              <div className="flex items-center gap-1.5">
-                <div className="text-xs font-mono text-text-muted">
-                  Score: <span className="text-text-primary font-bold">{importance * difficulty}</span>/25
+              <div className="flex items-center gap-2">
+                <div className="text-xs text-text-muted">
+                  Score <span className="text-text-primary font-semibold">{importance * difficulty}</span>/25
                 </div>
                 {importance * difficulty >= 15 && (
-                  <span className="flex items-center gap-1 text-[9px] font-mono uppercase font-bold tracking-wider text-accent-custom px-1.5 py-0.5 bg-accent-custom/10 rounded">
+                  <span className="inline-flex items-center gap-1 text-[11px] font-medium text-accent-custom">
                     <Flame className="w-3 h-3" /> High priority
                   </span>
                 )}
@@ -559,9 +560,9 @@ export default function App() {
 
               <button
                 type="submit"
-                className="inline-flex items-center gap-2 bg-text-primary text-app-bg hover:opacity-90 font-semibold text-xs py-2 px-6 rounded-lg transition-all active:scale-[0.98] cursor-pointer"
+                className="inline-flex items-center gap-2 bg-accent-custom text-white hover:opacity-90 font-semibold text-sm py-2.5 px-6 rounded-lg transition-all active:scale-[0.98] cursor-pointer"
               >
-                <Plus className="w-4 h-4" /> Add Task
+                <Plus className="w-4 h-4" /> Add task
               </button>
             </div>
 
@@ -569,60 +570,60 @@ export default function App() {
         </section>
 
         {/* Configuration Bar: Notification Authorization & Reset to Factory */}
-        <section className="flex flex-col sm:flex-row items-center justify-between gap-4 border border-border-custom rounded-2xl p-4 bg-card-bg/50 transition-colors duration-300">
+        <section className="flex flex-col sm:flex-row items-center justify-between gap-4 border border-border-custom rounded-2xl p-4 bg-card-bg">
           <div className="flex items-center gap-3">
             <button
               onClick={requestNotificationPermission}
-              className={`inline-flex items-center gap-2 text-xs font-semibold px-4 py-2 rounded-xl border transition-all cursor-pointer ${
+              className={`inline-flex items-center gap-2 text-xs font-medium px-4 py-2 rounded-lg border transition-all cursor-pointer ${
                 notificationPermission === 'granted'
-                  ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20'
+                  ? 'bg-[#EFF4EE] text-[#146C5C] border-[#146C5C]/20'
                   : 'bg-app-bg text-text-primary border-border-custom hover:border-text-muted'
               }`}
             >
               {notificationPermission === 'granted' ? (
                 <>
-                  <Bell className="w-4 h-4" /> System Alerts Active
+                  <Bell className="w-4 h-4" /> Moving — alerts active
                 </>
               ) : (
                 <>
-                  <BellOff className="w-4 h-4 text-text-muted" /> Enable System Notifications
+                  <BellOff className="w-4 h-4 text-text-muted" /> Enable notifications
                 </>
               )}
             </button>
             <div className="hidden md:block text-[10px] text-text-muted max-w-[200px] leading-relaxed">
-              Calculates priority score to ping if uncompleted for 10s.
+              Alerts you when an urgent item sits uncompleted.
             </div>
           </div>
 
           <button
             onClick={handleResetDefaults}
-            className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-text-muted hover:text-text-primary border border-dashed border-border-custom hover:border-text-muted px-3 py-1.5 rounded-xl transition-all cursor-pointer"
-            title="Reload default aesthetic template tasks"
+            className="inline-flex items-center gap-1.5 text-xs font-medium text-text-muted hover:text-text-primary border border-border-custom px-3 py-2 rounded-lg transition-all cursor-pointer"
+            title="Reload the starting list"
           >
-            <RotateCcw className="w-3.5 h-3.5" /> reset template
+            <RotateCcw className="w-3.5 h-3.5" /> Reset to defaults
           </button>
         </section>
 
         {/* Priority Stack Container */}
         <section className="flex flex-col gap-4">
           <div className="flex items-center justify-between select-none px-1">
-            <h2 className="text-xs uppercase font-mono font-bold tracking-wider text-text-muted flex items-center gap-1.5">
-              The Priority Stack
-              <span className="font-mono font-normal text-[10px] text-text-muted/60">
-                ({activeTasks.length} active · {completedTasks.length} completed)
+            <h2 className="text-lg font-display text-text-primary flex items-baseline gap-2">
+              The priority stack
+              <span className="text-xs font-normal text-text-muted">
+                {activeTasks.length} active · {completedTasks.length} completed
               </span>
             </h2>
             <div className="flex items-center gap-3">
-              <div className="text-[10px] font-mono text-text-muted">
-                Descending Priority Score
+              <div className="text-[11px] text-text-muted">
+                Sorted by score
               </div>
               {completedTasks.length > 0 && (
                 <button
                   onClick={handleClearCompleted}
-                  className="text-[10px] font-mono text-text-muted hover:text-red-500 border border-dashed border-border-custom hover:border-red-500/40 px-2 py-0.5 rounded-md transition-all cursor-pointer"
+                  className="text-[11px] font-medium text-text-muted hover:text-red-600 transition-colors cursor-pointer"
                   title={`Remove ${completedTasks.length} completed task${completedTasks.length === 1 ? '' : 's'}`}
                 >
-                  clear completed
+                  Clear completed
                 </button>
               )}
             </div>
@@ -706,21 +707,21 @@ export default function App() {
 
                           {/* Extra Metadata, badges, tags */}
                           <div className="flex flex-wrap items-center gap-1.5 select-none">
-                            <span className="text-[9px] font-mono font-medium uppercase tracking-tight text-text-muted/80 bg-app-bg px-1.5 py-0.5 rounded border border-border-custom/60">
-                              imp: {task.importance}
+                            <span className="text-[11px] font-medium text-text-muted/80 bg-app-bg px-1.5 py-0.5 rounded-md border border-border-custom/60">
+                              imp {task.importance}
                             </span>
-                            <span className="text-[9px] font-mono font-medium uppercase tracking-tight text-text-muted/80 bg-app-bg px-1.5 py-0.5 rounded border border-border-custom/60">
-                              diff: {task.difficulty}
+                            <span className="text-[11px] font-medium text-text-muted/80 bg-app-bg px-1.5 py-0.5 rounded-md border border-border-custom/60">
+                              diff {task.difficulty}
                             </span>
                             {task.ai_generated && (
-                              <span className="inline-flex items-center gap-0.5 text-[9px] font-mono text-indigo-500 font-semibold px-1.5 py-0.5 bg-indigo-500/10 rounded">
-                                <Sparkles className="w-2.5 h-2.5" /> ai ready
+                              <span className="inline-flex items-center gap-0.5 text-[11px] text-text-muted px-1.5 py-0.5 bg-app-bg rounded-md border border-border-custom/60">
+                                <Sparkles className="w-2.5 h-2.5" /> ai
                               </span>
                             )}
                             {task.context_tags && task.context_tags.map(tag => (
                               <span 
                                 key={`badge-${task.id}-${tag}`} 
-                                className="text-[9px] font-mono text-text-muted/80 px-1 py-0.5 bg-app-bg/50 border border-border-custom/40 rounded"
+                                className="text-[11px] text-text-muted/80 px-1.5 py-0.5 bg-app-bg border border-border-custom/60 rounded-md"
                               >
                                 #{tag}
                               </span>
@@ -746,7 +747,7 @@ export default function App() {
                           >
                             {task.score}
                           </div>
-                          <div className="text-[8px] uppercase font-mono tracking-wider text-text-muted">
+                          <div className="text-[10px] text-text-muted">
                             score
                           </div>
                         </div>
@@ -754,7 +755,7 @@ export default function App() {
                         {/* Action Buttons */}
                         <button
                           onClick={() => handleDeleteTask(task.id)}
-                          className="p-2 text-text-muted hover:text-red-500 hover:bg-red-500/10 rounded-lg transition-all opacity-100 md:opacity-0 md:group-hover:opacity-100 focus:opacity-100 flex-shrink-0 cursor-pointer"
+                          className="p-2 text-text-muted hover:text-red-600 hover:bg-red-500/10 rounded-lg transition-all opacity-100 md:opacity-0 md:group-hover:opacity-100 focus:opacity-100 flex-shrink-0 cursor-pointer"
                           title="Delete task"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -770,17 +771,17 @@ export default function App() {
           </div>
         </section>
 
-        {/* Footer info about Komma. Design Philosophy & Agent Sync */}
+        {/* Footer */}
         <footer className="mt-8 border-t border-border-custom/60 pt-6 text-center flex flex-col items-center gap-2 select-none">
-          <div className="text-[10px] font-mono text-text-muted flex items-center gap-1.5">
-            <span>offline priority sorting PWA</span>
-            <span className="text-border-custom">•</span>
-            <span>Komma aesthetic specification</span>
-            <span className="text-border-custom">•</span>
-            <span>Agent-ready JSON metadata layout</span>
+          <div className="text-xs text-text-muted flex items-center gap-2">
+            <span>Offline-first task prioritizer</span>
+            <span className="text-border-custom">·</span>
+            <span>Ranks by importance × difficulty</span>
+            <span className="text-border-custom">·</span>
+            <span>Works without a network</span>
           </div>
-          <div className="text-[9px] text-text-muted/50 font-mono italic">
-            Priority Score = Importance (1–5) × Difficulty (1–5). Descending layout priority.
+          <div className="text-[11px] text-text-muted/60 italic">
+            Priority score = Importance (1–5) × Difficulty (1–5). Higher first.
           </div>
         </footer>
 
