@@ -366,11 +366,11 @@ export default function App() {
               initial={{ opacity: 0, y: -20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9, y: -10 }}
-              className={`p-4 rounded-xl border shadow-sm flex items-start gap-3 pointer-events-auto ${
+              className={`p-4 rounded-2xl border shadow-sm flex items-start gap-3 pointer-events-auto ${
                 toast.type === 'warning' 
-                  ? 'bg-[#FBF1E8] text-[#9A3412] border-[#9A3412]/20' 
+                  ? 'bg-[var(--color-accent-soft)] text-[var(--color-accent-dark)] border-border-custom' 
                   : toast.type === 'success' 
-                  ? 'bg-[#EFF4EE] text-[#146C5C] border-[#146C5C]/20' 
+                  ? 'bg-[#EEF3EE] text-[#3F6B45] border-border-custom' 
                   : 'bg-card-bg text-text-primary border-border-custom'
               }`}
             >
@@ -396,7 +396,7 @@ export default function App() {
             {!isInstalled ? (
               <button
                 onClick={handleInstallClick}
-                className="inline-flex items-center gap-1.5 text-xs font-medium text-text-muted hover:text-text-primary border border-border-custom rounded-lg px-3 py-2 transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1.5 text-xs font-medium text-text-muted hover:text-text-primary border border-border-custom rounded-full px-4 py-2 transition-colors cursor-pointer"
                 title="Install prioriti. as a native app on your device"
               >
                 <Plus className="w-3.5 h-3.5" />
@@ -404,10 +404,10 @@ export default function App() {
               </button>
             ) : (
               <div 
-                className="inline-flex items-center gap-1.5 text-xs font-medium text-[#146C5C] rounded-lg px-3 py-2 border border-[#146C5C]/20"
+                className="inline-flex items-center gap-1.5 text-xs font-medium text-[#3F6B45] rounded-full px-4 py-2 border border-border-custom"
                 title="prioriti. is running in native app mode"
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-[#146C5C]" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#3F6B45]" />
                 Installed
               </div>
             )}
@@ -453,7 +453,7 @@ export default function App() {
                       key={`imp-${val}`}
                       type="button"
                       onClick={() => setImportance(val)}
-                      className={`flex-1 py-1.5 rounded-lg text-xs font-medium border transition-all ${
+                      className={`flex-1 py-1.5 rounded-full text-xs font-medium border transition-all ${
                         importance === val
                           ? 'bg-accent-custom border-accent-custom text-white'
                           : 'bg-app-bg border-border-custom text-text-muted hover:text-text-primary hover:border-text-muted'
@@ -476,7 +476,7 @@ export default function App() {
                       key={`diff-${val}`}
                       type="button"
                       onClick={() => setDifficulty(val)}
-                      className={`flex-1 py-1.5 rounded-lg text-xs font-medium border transition-all ${
+                      className={`flex-1 py-1.5 rounded-full text-xs font-medium border transition-all ${
                         difficulty === val
                           ? 'bg-accent-custom border-accent-custom text-white'
                           : 'bg-app-bg border-border-custom text-text-muted hover:text-text-primary hover:border-text-muted'
@@ -504,12 +504,12 @@ export default function App() {
                     onChange={e => setTagInput(e.target.value)}
                     onKeyDown={e => e.key === 'Enter' && (e.preventDefault(), handleAddTag())}
                     placeholder="e.g. work, family, health — press Enter"
-                    className="w-full bg-app-bg text-xs border border-border-custom rounded-lg pl-9 pr-14 py-2 text-text-primary transition-all placeholder:text-text-muted"
+                    className="w-full bg-app-bg text-xs border border-border-custom rounded-full pl-9 pr-14 py-2 text-text-primary transition-all placeholder:text-text-muted"
                   />
                   <button
                     type="button"
                     onClick={handleAddTag}
-                    className="absolute right-1.5 top-1.5 bg-card-bg hover:bg-border-custom border border-border-custom text-[11px] font-medium px-2.5 py-1 rounded-md transition-colors text-text-primary"
+                    className="absolute right-1.5 top-1.5 bg-card-bg hover:bg-border-custom border border-border-custom text-[11px] font-medium px-2.5 py-1 rounded-full transition-colors text-text-primary"
                   >
                     Add
                   </button>
@@ -528,7 +528,7 @@ export default function App() {
                     {contextTags.map(tag => (
                       <span 
                         key={`tag-${tag}`} 
-                        className="inline-flex items-center gap-1 px-2 py-1 bg-app-bg border border-border-custom text-[11px] rounded-md text-text-primary"
+                        className="inline-flex items-center gap-1 px-2.5 py-1 bg-app-bg border border-border-custom text-[11px] rounded-full text-text-primary"
                       >
                         #{tag}
                         <button 
@@ -560,7 +560,7 @@ export default function App() {
 
               <button
                 type="submit"
-                className="inline-flex items-center gap-2 bg-accent-custom text-white hover:opacity-90 font-semibold text-sm py-2.5 px-6 rounded-lg transition-all active:scale-[0.98] cursor-pointer"
+                className="inline-flex items-center gap-2 border border-transparent bg-text-primary text-app-bg hover:-translate-y-0.5 hover:border-accent-custom font-semibold text-sm py-2.5 px-7 rounded-full transition-all active:scale-[0.98] cursor-pointer"
               >
                 <Plus className="w-4 h-4" /> Add task
               </button>
@@ -574,9 +574,9 @@ export default function App() {
           <div className="flex items-center gap-3">
             <button
               onClick={requestNotificationPermission}
-              className={`inline-flex items-center gap-2 text-xs font-medium px-4 py-2 rounded-lg border transition-all cursor-pointer ${
+              className={`inline-flex items-center gap-2 text-xs font-medium px-4 py-2 rounded-full border transition-all cursor-pointer ${
                 notificationPermission === 'granted'
-                  ? 'bg-[#EFF4EE] text-[#146C5C] border-[#146C5C]/20'
+                  ? 'bg-[#EEF3EE] text-[#3F6B45] border-border-custom'
                   : 'bg-app-bg text-text-primary border-border-custom hover:border-text-muted'
               }`}
             >
@@ -597,7 +597,7 @@ export default function App() {
 
           <button
             onClick={handleResetDefaults}
-            className="inline-flex items-center gap-1.5 text-xs font-medium text-text-muted hover:text-text-primary border border-border-custom px-3 py-2 rounded-lg transition-all cursor-pointer"
+            className="inline-flex items-center gap-1.5 text-xs font-medium text-text-muted hover:text-text-primary border border-border-custom px-4 py-2 rounded-full transition-all cursor-pointer"
             title="Reload the starting list"
           >
             <RotateCcw className="w-3.5 h-3.5" /> Reset to defaults
@@ -657,7 +657,7 @@ export default function App() {
                         transition: { type: 'spring', stiffness: 300, damping: 30 }
                       }}
                       exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                      className={`flex items-center justify-between p-4 md:p-5 rounded-xl border transition-colors duration-300 relative overflow-hidden group ${
+                      className={`flex items-center justify-between p-4 md:p-5 rounded-2xl border transition-colors duration-300 relative overflow-hidden group hover:-translate-y-0.5 ${
                         task.completed 
                           ? 'bg-card-bg/40 border-border-custom/50 text-text-muted' 
                           : isHighPriority
