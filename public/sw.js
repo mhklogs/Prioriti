@@ -1,4 +1,7 @@
-const CACHE_NAME = 'prioriti-cache-v2';
+const CACHE_NAME = 'prioriti-cache-v3';
+const FONT_STYLESHEET =
+  'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap';
+const FONT_ORIGINS = ['https://fonts.googleapis.com', 'https://fonts.gstatic.com'];
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
@@ -34,9 +37,31 @@ self.addEventListener('fetch', (event) => {
   // Only handle GET requests
   if (event.request.method !== 'GET') return;
 
-  // Let browser extensions or external URLs be fetched normally
   const url = new URL(event.request.url);
-  if (!url.origin.startsWith(self.location.origin)) {
+
+  // Font assets are cross-origin, so they need their own cache-first branch
+  // in order to survive going offline.
+  if (FONT_ORIGINS.includes(url.origin)) {
+    event.respondWith(
+      caches.match(event.request).then((cachedResponse) => {
+        const networkResponse = fetch(event.request)
+          .then((response) => {
+            if (response && (response.status === 200 || response.type === 'opaque')) {
+              const copy = response.clone();
+              caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+            }
+            return response;
+          })
+          .catch(() => cachedResponse);
+
+        return cachedResponse || networkResponse;
+      })
+    );
+    return;
+  }
+
+  // Let browser extensions or other external URLs be fetched normally
+  if (url.origin !== self.location.origin) {
     return;
   }
 
